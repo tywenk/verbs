@@ -10,6 +10,21 @@ export const GET_VERBS = gql`
 			networks: { chain: MAINNET, network: ETHEREUM }
 			pagination: { limit: 10, after: $page }
 			sort: { sortKey: TIME, sortDirection: DESC }
+			filter: {
+				saleTypes: [
+					OPENSEA_SINGLE_SALE
+					OPENSEA_BUNDLE_SALE
+					LOOKS_RARE_SALE
+					SUPERRARE_SALE
+					RARIBLE_SALE
+					ZORA_V3_ASK_SALE
+					ZORA_V2_AUCTION_SALE
+					FOUNDATION_SALE
+					CRYPTOPUNKS_SALE
+					ZEROX_SALE
+					RARIBLE_SALE
+				]
+			}
 		) {
 			nodes {
 				token {

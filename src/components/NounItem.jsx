@@ -41,6 +41,7 @@ function NounItem({ verb }) {
 						TxHash
 					</a>
 				</p>
+				<p>{sale.saleType}</p>
 			</div>
 		</div>
 	)
