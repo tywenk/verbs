@@ -31,7 +31,6 @@ function App() {
 
 	return (
 		<div>
-			<h1>Hello World</h1>
 			<Button text='Prev' handleClick={handlePrev} />
 			<Button text='Next' handleClick={handleNext} />
 			{data?.sales?.nodes.map((verb, i) => {
