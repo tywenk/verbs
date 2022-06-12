@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App"
+import NotFound from "@/components/NotFound"
 import "./index.css"
 import "@rainbow-me/rainbowkit/styles.css"
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				<RainbowKitProvider chains={chains}>
 					<BrowserRouter>
 						<Routes>
+							<Route path='*' element={<NotFound />} />
 							<Route path='/' element={<App />} />
 						</Routes>
 					</BrowserRouter>
