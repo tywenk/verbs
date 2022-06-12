@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client"
+import { graphql } from "graphql"
 
 export const GET_VERBS = gql`
 	query Verbs($page: String!) {
@@ -16,8 +17,6 @@ export const GET_VERBS = gql`
 					RARIBLE_SALE
 					ZORA_V3_ASK_SALE
 					ZORA_V2_AUCTION_SALE
-					FOUNDATION_SALE
-					CRYPTOPUNKS_SALE
 					ZEROX_SALE
 					RARIBLE_SALE
 				]

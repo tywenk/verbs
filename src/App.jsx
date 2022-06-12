@@ -8,7 +8,14 @@ function App() {
 	const [prevPages, setPrevPages] = useState([""])
 	const [currentPage, setCurrentPage] = useState("")
 
-	const { loading, error, data } = useQuery(GET_VERBS, { variables: { page: currentPage } })
+	const { loading, error, data } = useQuery(GET_VERBS, {
+		variables: { page: currentPage },
+		context: {
+			headers: {
+				"X-API-KEY": import.meta.env.VITE_ZORA_API_KEY, // this header will reach the server
+			},
+		},
+	})
 
 	async function handleNext() {
 		if (data.sales.pageInfo.hasNextPage) {
@@ -24,8 +31,8 @@ function App() {
 		}
 	}
 
-	if (loading) return <div>Loading...</div>
-	if (error) return <div>Error</div>
+	// if (loading) return <div>Loading...</div>
+	// if (error) return <div>Error</div>
 
 	console.log(data)
 
@@ -33,9 +40,15 @@ function App() {
 		<div>
 			<Button text='Prev' handleClick={handlePrev} />
 			<Button text='Next' handleClick={handleNext} />
-			{data?.sales?.nodes.map((verb, i) => {
-				return <NounItem verb={verb} key={i} />
-			})}
+			{loading && <div>Loading...</div>}
+			{error && <div>Error</div>}
+			{data && (
+				<div className='grid grid-cols-2'>
+					{data?.sales?.nodes.map((verb, i) => {
+						return <NounItem verb={verb} key={i} />
+					})}
+				</div>
+			)}
 		</div>
 	)
 }

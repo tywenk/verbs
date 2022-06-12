@@ -8,6 +8,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 const client = new ApolloClient({
 	uri: "https://api.zora.co/graphql",
@@ -16,7 +17,7 @@ const client = new ApolloClient({
 
 const { chains, provider } = configureChains(
 	[chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
-	[alchemyProvider({ alchemyId: process.env.VITE_ALCHEMY_API_KEY }), publicProvider()]
+	[alchemyProvider({ alchemyId: import.meta.env.VITE_ALCHEMY_API_KEY }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
@@ -35,7 +36,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<ApolloProvider client={client}>
 			<WagmiConfig client={wagmiClient}>
 				<RainbowKitProvider chains={chains}>
-					<App />
+					<BrowserRouter>
+						<Routes>
+							<Route path='/' element={<App />} />
+						</Routes>
+					</BrowserRouter>
 				</RainbowKitProvider>
 			</WagmiConfig>
 		</ApolloProvider>
